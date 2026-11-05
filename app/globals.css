@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/* Design tokens — exposed as Tailwind utilities (bg-canvas, text-ink, border-line, ...) */
+@theme {
+  --color-canvas: #fafaf8;
+  --color-card: #ffffff;
+  --color-ink: #14263d;
+  --color-muted: #56657a;
+  --color-subtle: #7a8799;
+  --color-accent: #3563e9;
+  --color-accent-strong: #2a50c4;
+  --color-accent-soft: #eef2fd;
+  --color-line: #e6eaf0;
+  --color-line-strong: #d5dbe4;
+  --color-amber: #9a5b00;
+  --color-amber-soft: #fdf4e3;
+
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  --shadow-card: 0 1px 2px rgb(20 38 61 / 0.04), 0 1px 1px rgb(20 38 61 / 0.02);
+  --shadow-lift: 0 1px 2px rgb(20 38 61 / 0.04), 0 12px 32px -12px rgb(20 38 61 / 0.14);
+
+  --animate-flow: flow 1.2s linear infinite;
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -16;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: #d9e3fc;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+/* Scroll reveal — content stays visible when JavaScript is unavailable. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: calc(var(--reveal-delay, 0) * 80ms);
+}
+
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
