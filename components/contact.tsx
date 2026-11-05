@@ -5,12 +5,14 @@ import { Container, GitHubIcon, buttonStyles } from "./ui";
 
 export function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-20 sm:py-28">
+    <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-14 sm:py-20">
       <Container>
         <div
           data-reveal
-          className="relative overflow-hidden rounded-3xl bg-ink px-6 py-14 text-white sm:px-14 sm:py-20"
+          className="relative isolate overflow-hidden rounded-3xl bg-ink px-6 py-12 text-white sm:px-14 sm:py-14"
         >
+          <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-[#6d4ae8]/35 blur-[90px] animate-drift" />
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-32 left-1/3 -z-10 h-72 w-72 rounded-full bg-[#3563e9]/30 blur-[90px] animate-drift [animation-delay:-9s]" />
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_right,rgb(255_255_255/0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgb(255_255_255/0.05)_1px,transparent_1px)] bg-[size:48px_48px] [mask-image:radial-gradient(ellipse_60%_80%_at_85%_20%,black,transparent_70%)]"

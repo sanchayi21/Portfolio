@@ -6,13 +6,15 @@ type Props = {
   /** Index into diagram.steps; null shows the whole system without emphasis. */
   activeStep: number | null;
   idPrefix: string;
+  /** Phones show the flow list only on request, which keeps the page short. */
+  showMobile: boolean;
 };
 
 /**
  * Renders a project's architecture from data: a scalable SVG on tablet/desktop and an
  * ordered, readable flow on phones, where an SVG would shrink below legible text size.
  */
-export function ArchitectureDiagram({ diagram, activeStep, idPrefix }: Props) {
+export function ArchitectureDiagram({ diagram, activeStep, idPrefix, showMobile }: Props) {
   const step = activeStep === null ? null : diagram.steps[activeStep];
   const nodeOn = (id: string) => !step || step.nodes.includes(id);
   const edgeOn = (id: string) => !step || step.edges.includes(id);
@@ -26,7 +28,7 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix }: Props) {
         viewBox={`0 0 ${diagram.width} ${diagram.height}`}
         role="img"
         aria-labelledby={`${idPrefix}-title ${idPrefix}-desc`}
-        className="mx-auto hidden h-auto w-full max-w-[880px] md:block"
+        className="mx-auto hidden h-auto w-full max-w-[820px] md:block"
       >
         <title id={`${idPrefix}-title`}>{diagram.title}</title>
         <desc id={`${idPrefix}-desc`}>{diagram.summary}</desc>
@@ -55,7 +57,7 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix }: Props) {
       </svg>
 
       {/* Phone layout: the same system as an ordered flow. */}
-      <ol className="space-y-0 md:hidden" aria-label={diagram.title}>
+      <ol className={`space-y-0 md:hidden ${showMobile ? "" : "hidden"}`} aria-label={diagram.title}>
         {diagram.mobileFlow.map((item) => {
           const node = nodeById.get(item.node);
           if (!node) return null;
@@ -75,7 +77,7 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix }: Props) {
       {diagram.nodes
         .filter((n) => n.kind === "planned" && !diagram.mobileFlow.some((f) => f.node === n.id))
         .map((n) => (
-          <div key={n.id} className="mt-4 md:hidden">
+          <div key={n.id} className={`mt-4 md:hidden ${showMobile ? "" : "hidden"}`}>
             <MobileNode node={n} on={nodeOn(n.id)} emphasized={step !== null && nodeOn(n.id)} />
           </div>
         ))}
@@ -85,7 +87,8 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix }: Props) {
 
 function Edge({ edge, on, emphasized, marker }: { edge: DiagramEdge; on: boolean; emphasized: boolean; marker: string }) {
   const stroke = emphasized ? "#3563E9" : edge.planned ? "#B9C2CF" : "#9AA6B6";
-  const dash = edge.planned ? "2 5" : edge.dashed || emphasized ? "4 4" : undefined;
+  // Every implemented connection carries a slow flowing dash; the active step's edges flow faster.
+  const dash = edge.planned ? "2 5" : "4 4";
   return (
     <g style={{ opacity: on ? 1 : 0.25, transition: "opacity 300ms" }}>
       <polyline
@@ -97,14 +100,14 @@ function Edge({ edge, on, emphasized, marker }: { edge: DiagramEdge; on: boolean
         strokeLinecap="round"
         markerEnd={edge.planned ? undefined : `url(#${marker})`}
         markerStart={edge.bidirectional ? `url(#${marker})` : undefined}
-        className={emphasized ? "animate-flow motion-reduce:animate-none" : undefined}
+        className={edge.planned ? undefined : emphasized ? "animate-flow" : "animate-flow-slow"}
       />
       {edge.label && edge.labelX !== undefined && edge.labelY !== undefined ? (
         <text
           x={edge.labelX}
           y={edge.labelY}
           textAnchor="middle"
-          fontSize="11"
+          fontSize="12"
           fontFamily="var(--font-inter), sans-serif"
           fill={emphasized ? "#2A50C4" : "#56657A"}
           fontWeight={emphasized ? 600 : 500}
@@ -148,7 +151,7 @@ function Node({ node, on, emphasized }: { node: DiagramNode; on: boolean; emphas
         x={cx}
         y={node.y + node.h / 2 - 2}
         textAnchor="middle"
-        fontSize="13.5"
+        fontSize="15"
         fontWeight="700"
         fontFamily="var(--font-manrope), sans-serif"
         fill={planned ? "#56657A" : "#14263D"}
@@ -157,9 +160,9 @@ function Node({ node, on, emphasized }: { node: DiagramNode; on: boolean; emphas
       </text>
       <text
         x={cx}
-        y={node.y + node.h / 2 + 15}
+        y={node.y + node.h / 2 + 16}
         textAnchor="middle"
-        fontSize="11"
+        fontSize="12"
         fontFamily="var(--font-inter), sans-serif"
         fill="#56657A"
       >

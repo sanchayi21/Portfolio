@@ -35,17 +35,17 @@ export const navItems = [
 export const impactMetrics = [
   {
     value: "5,000+",
-    label: "Active users",
-    context: "supported by onboarding, content and progress-tracking features I built at Nexamuse.",
+    label: "Active users served",
+    context: "on the onboarding, content and progress tracking features I built at Nexamuse.",
   },
   {
     value: "40%",
     label: "Faster API responses",
-    context: "average response-time reduction at Nexamuse after SQL JOIN optimization and Redis caching.",
+    context: "cut from average API response time at Nexamuse through SQL JOIN optimization and Redis caching.",
   },
   {
     value: "60%",
     label: "Less manual data prep",
-    context: "through automated research data pipelines as a Graduate Research Assistant at UT Arlington.",
+    context: "after I automated research data pipelines as a Graduate Research Assistant at UT Arlington.",
   },
 ] as const;

@@ -7,7 +7,7 @@ export function Footer() {
     <footer className="border-t border-line py-8">
       <Container className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
         <p className="text-sm text-muted">
-          {site.name} · Built with React, Next.js &amp; TypeScript
+          © {new Date().getFullYear()} {site.name}
         </p>
         <a
           href="#top"

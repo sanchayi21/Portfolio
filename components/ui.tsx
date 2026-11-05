@@ -11,7 +11,7 @@ export function Section({
   ...rest
 }: { id: string; className?: string; children: ReactNode } & ComponentPropsWithoutRef<"section">) {
   return (
-    <section id={id} className={`py-20 sm:py-28 ${className}`} {...rest}>
+    <section id={id} className={`py-14 sm:py-20 ${className}`} {...rest}>
       <Container>{children}</Container>
     </section>
   );
@@ -29,9 +29,12 @@ export function SectionHeading({
   intro?: ReactNode;
 }) {
   return (
-    <header className="mb-12 max-w-2xl sm:mb-16" data-reveal>
-      <p className="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-accent">{eyebrow}</p>
-      <h2 id={id} className="text-3xl font-bold leading-tight text-ink sm:text-[2.6rem]">
+    <header className="mb-8 max-w-2xl sm:mb-10" data-reveal>
+      <p className="mb-3 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-accent">
+        <span aria-hidden="true" className="h-px w-6 bg-[linear-gradient(90deg,#3563e9,#6d4ae8)]" />
+        {eyebrow}
+      </p>
+      <h2 id={id} className="text-3xl font-bold leading-tight text-ink sm:text-[2.4rem]">
         {title}
       </h2>
       {intro ? <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">{intro}</p> : null}
@@ -43,7 +46,7 @@ const base =
   "inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition-all duration-200 focus-visible:outline-offset-4";
 
 export const buttonStyles = {
-  primary: `${base} bg-accent text-white shadow-[0_1px_2px_rgb(53_99_233/0.3),0_6px_16px_-6px_rgb(53_99_233/0.5)] hover:-translate-y-px hover:bg-accent-strong`,
+  primary: `${base} bg-[linear-gradient(135deg,#3563e9,#5b4be0)] text-white shadow-[0_1px_2px_rgb(53_99_233/0.3),0_8px_20px_-8px_rgb(91_75_224/0.6)] hover:-translate-y-px hover:shadow-[0_1px_2px_rgb(53_99_233/0.3),0_12px_24px_-8px_rgb(91_75_224/0.7)] hover:brightness-110`,
   secondary: `${base} border border-line-strong bg-card text-ink shadow-card hover:-translate-y-px hover:border-ink/25 hover:shadow-lift`,
   ghost: `${base} px-3 text-muted hover:bg-ink/[0.04] hover:text-ink`,
   /** Variants for use on the dark contact panel. */

@@ -63,10 +63,10 @@ export function Navbar() {
         scrolled || open ? "border-b border-line bg-canvas/85 backdrop-blur-md" : "border-b border-transparent"
       }`}
     >
-      <nav aria-label="Primary" className="mx-auto flex h-16 max-w-[1180px] items-center justify-between px-5 sm:px-8">
+      <nav aria-label="Primary" className="mx-auto flex h-[4.25rem] max-w-[1180px] items-center justify-between px-5 sm:px-8">
         <a
           href="#top"
-          className="font-display text-[1.05rem] font-bold tracking-tight text-ink"
+          className="font-display text-xl font-extrabold tracking-tight text-ink sm:text-[1.4rem]"
           onClick={() => setOpen(false)}
         >
           {site.name}

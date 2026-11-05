@@ -82,6 +82,7 @@ export const projects: Project[] = [
     title: "AI-Powered PR Risk Assistant",
     subtitle: "Webhook-driven AI code review",
     category: "AI · Backend · Developer Tools",
+    status: "Completed",
     summary:
       "A code-review platform that listens to GitHub pull-request events, retrieves the changed code and generates structured findings that flag potential bugs, security risks and missing tests.",
     stack: ["FastAPI", "React", "TypeScript", "PostgreSQL", "Groq LLM", "GitHub REST API", "Docker"],
@@ -91,6 +92,8 @@ export const projects: Project[] = [
       "LLM analysis returned as structured, reviewable findings",
       "React/TypeScript dashboard for reviewing results",
     ],
+    repoUrl: "https://github.com/sanchayi21/pr-risk-assistant",
+    demoUrl: "https://pr-risk-assistant.vercel.app",
     details: [
       {
         heading: "The problem",
@@ -127,15 +130,15 @@ export const projects: Project[] = [
       width: 760,
       height: 340,
       nodes: [
-        { id: "pr", label: "GitHub Pull Request", sub: "PR event", x: 16, y: 142, w: 160, h: 56, kind: "external" },
-        { id: "api", label: "FastAPI Backend", sub: "validate · dedupe · orchestrate", x: 296, y: 130, w: 184, h: 80, kind: "primary" },
+        { id: "pr", label: "GitHub Pull Request", sub: "PR event", x: 0, y: 142, w: 184, h: 56, kind: "external" },
+        { id: "api", label: "FastAPI Backend", sub: "async API · dedupe", x: 296, y: 130, w: 184, h: 80, kind: "primary" },
         { id: "gh", label: "GitHub REST API", sub: "changed files & diff", x: 296, y: 16, w: 184, h: 56, kind: "external" },
         { id: "llm", label: "Groq LLM", sub: "structured analysis", x: 584, y: 56, w: 160, h: 56, kind: "external" },
         { id: "db", label: "PostgreSQL", sub: "events · findings", x: 584, y: 228, w: 160, h: 56 },
         { id: "ui", label: "React Dashboard", sub: "TypeScript review UI", x: 296, y: 268, w: 184, h: 56 },
       ],
       edges: [
-        { id: "e-webhook", from: "pr", to: "api", points: "176,170 296,170", label: "webhook", labelX: 236, labelY: 160 },
+        { id: "e-webhook", from: "pr", to: "api", points: "184,170 296,170", label: "webhook", labelX: 240, labelY: 160 },
         { id: "e-diff", from: "api", to: "gh", points: "388,130 388,72", label: "fetch diff", labelX: 430, labelY: 105, bidirectional: true },
         { id: "e-llm", from: "api", to: "llm", points: "480,150 584,90", label: "analyze", labelX: 512, labelY: 110, bidirectional: true },
         { id: "e-db", from: "api", to: "db", points: "480,190 584,250", label: "persist", labelX: 512, labelY: 236, bidirectional: true },
@@ -253,7 +256,7 @@ export const projects: Project[] = [
         { id: "orders", label: "Orders", sub: "FastAPI service", x: 316, y: 40, w: 128, h: 72, kind: "primary" },
         { id: "inventory", label: "Inventory", sub: "FastAPI service", x: 474, y: 40, w: 128, h: 72, kind: "primary" },
         { id: "pg", label: "PostgreSQL", sub: "Docker Compose", x: 632, y: 40, w: 128, h: 72 },
-        { id: "obs", label: "Observability layer", sub: "OpenTelemetry traces · Prometheus metrics · React investigation UI", x: 158, y: 200, w: 444, h: 72, kind: "planned" },
+        { id: "obs", label: "Observability layer", sub: "OpenTelemetry tracing · Prometheus metrics · React UI", x: 158, y: 200, w: 444, h: 72, kind: "planned" },
       ],
       edges: [
         { id: "r1", from: "client", to: "gateway", points: "128,66 158,66" },
