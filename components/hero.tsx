@@ -15,16 +15,9 @@ export function Hero() {
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#e6eaf0_1px,transparent_1px),linear-gradient(to_bottom,#e6eaf0_1px,transparent_1px)] bg-[size:56px_56px] opacity-60 [mask-image:radial-gradient(ellipse_70%_65%_at_25%_35%,black,transparent_75%)]" />
       </div>
       <Container>
-        <div className="max-w-4xl">
-          <p data-reveal className="font-display text-3xl font-extrabold tracking-[-0.03em] text-ink sm:text-[2.6rem]">
-            {site.name}
-            <span className="text-accent">.</span>
-          </p>
-          <p
-            data-reveal
-            style={delay(1)}
-            className="mb-6 mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:text-[0.8rem]"
-          >
+        {/* w-fit + w-0/min-w-full makes the paragraph exactly as wide as the headline. */}
+        <div className="w-fit max-w-4xl">
+          <p data-reveal className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-muted sm:text-[0.8rem]">
             {site.eyebrow}
           </p>
           <h1
@@ -35,7 +28,7 @@ export function Hero() {
           >
             Building reliable software and <span className="text-gradient">intelligent applications.</span>
           </h1>
-          <p data-reveal style={delay(3)} className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+          <p data-reveal style={delay(3)} className="mt-6 w-0 min-w-full text-lg leading-relaxed text-muted sm:text-xl">
             Software engineer building full-stack products, scalable backend services and AI-powered systems. M.S. in
             Computer Science from the University of Texas at Arlington.
           </p>
