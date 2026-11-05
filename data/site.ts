@@ -19,7 +19,7 @@ export const site = {
    * URL, sitemap and social previews. On Vercel, the production domain is detected
    * automatically if this is empty.
    */
-  url: "" as string,
+  url: "https://sanchayisharma.vercel.app" as string,
   description:
     "Sanchayi Sharma is a software engineer in Dallas, TX building full-stack products, backend services and AI-powered applications. M.S. in Computer Science, UT Arlington.",
 } as const;
