@@ -83,7 +83,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
             }`}
           >
             <Network className="h-3.5 w-3.5" aria-hidden="true" />
-            {project.status === "In Progress" ? "Current architecture" : "System architecture"} · diagram
+            {diagram.label ?? (project.status === "In Progress" ? "Current architecture" : "System architecture")} · diagram
           </p>
           <ArchitectureDiagram diagram={diagram} activeStep={archOpen ? step : null} idPrefix={uid} showMobile={archOpen} />
 
@@ -199,15 +199,14 @@ function StatusPill({ project }: { project: Project }) {
       </span>
     );
   }
-  if (project.demoUrl) {
-    return (
-      <span className="inline-flex items-center gap-1.5 rounded-full border border-[#B7E4C7] bg-[#EEFAF2] px-2.5 py-0.5 text-xs font-semibold text-[#1F7A45]">
-        <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#2FA864]" />
-        Live
-      </span>
-    );
-  }
-  return null;
+  const label = project.demoUrl ? "Live" : project.status === "Completed" ? "Completed" : null;
+  if (!label) return null;
+  return (
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#B7E4C7] bg-[#EEFAF2] px-2.5 py-0.5 text-xs font-semibold text-[#1F7A45]">
+      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#2FA864]" />
+      {label}
+    </span>
+  );
 }
 
 function DisclosureButton({

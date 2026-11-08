@@ -69,7 +69,9 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix, showMobile 
                   <ArrowDown className="h-3.5 w-3.5 text-subtle" aria-hidden="true" />
                   <span>{item.connector}</span>
                 </div>
-              ) : null}
+              ) : (
+                <div aria-hidden="true" className="h-2" />
+              )}
             </li>
           );
         })}
@@ -88,7 +90,7 @@ export function ArchitectureDiagram({ diagram, activeStep, idPrefix, showMobile 
 function Edge({ edge, on, emphasized, marker }: { edge: DiagramEdge; on: boolean; emphasized: boolean; marker: string }) {
   const stroke = emphasized ? "#3563E9" : edge.planned ? "#B9C2CF" : "#9AA6B6";
   // Every implemented connection carries a slow flowing dash; the active step's edges flow faster.
-  const dash = edge.planned ? "2 5" : "4 4";
+  const dash = edge.planned ? "2 5" : edge.dashed ? "2 4" : "4 4";
   return (
     <g style={{ opacity: on ? 1 : 0.25, transition: "opacity 300ms" }}>
       <polyline
