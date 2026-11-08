@@ -22,8 +22,8 @@ export default function Home() {
       <main id="main">
         <Hero />
         <About />
-        <Projects />
         <Experience />
+        <Projects />
         <Skills />
         <Education />
         <Contact />

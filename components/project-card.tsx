@@ -35,6 +35,18 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               {project.title}
             </h3>
             <StatusPill project={project} />
+            {project.demoUrl ? (
+              <a
+                href={project.demoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${project.title} live demo (opens in a new tab)`}
+                className="inline-flex min-h-8 items-center gap-1 rounded-full bg-[linear-gradient(135deg,#3563e9,#5b4be0)] px-3 text-xs font-semibold text-white shadow-[0_4px_12px_-4px_rgb(91_75_224/0.6)] transition-all duration-200 hover:-translate-y-px hover:brightness-110"
+              >
+                Live Demo
+                <ArrowUpRight className="h-3.5 w-3.5" aria-hidden="true" />
+              </a>
+            ) : null}
           </div>
           <p className="mt-1 font-display text-base font-semibold text-muted">{project.subtitle}</p>
 
@@ -119,18 +131,6 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
 
       {/* Actions */}
       <div className="flex flex-wrap items-center gap-2 border-t border-line px-6 py-4 sm:px-8">
-        {project.demoUrl ? (
-          <a
-            href={project.demoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`${buttonStyles.primary} min-h-10`}
-            aria-label={`${project.title} live demo (opens in a new tab)`}
-          >
-            Live Demo
-            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-          </a>
-        ) : null}
         {project.repoUrl ? (
           <a
             href={project.repoUrl}
@@ -199,14 +199,7 @@ function StatusPill({ project }: { project: Project }) {
       </span>
     );
   }
-  const label = project.demoUrl ? "Live" : project.status === "Completed" ? "Completed" : null;
-  if (!label) return null;
-  return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-[#B7E4C7] bg-[#EEFAF2] px-2.5 py-0.5 text-xs font-semibold text-[#1F7A45]">
-      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-[#2FA864]" />
-      {label}
-    </span>
-  );
+  return null;
 }
 
 function DisclosureButton({
